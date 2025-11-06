@@ -21,11 +21,13 @@ export const useScanner = () => {
   async function openScanner() {
     if (CameraView.isModernBarcodeScannerAvailable) {
       try {
-        await CameraView.launchScanner();
+        await CameraView.launchScanner({
+          barcodeTypes: ["qr"],
+        });
         return;
       } catch (e) {
         const error = e as Error;
-
+        console.error(error);
         if (error?.message?.toLowerCase().includes("cancelled")) {
           return;
         }
@@ -37,8 +39,6 @@ export const useScanner = () => {
   }
 
   useEffect(() => {
-    // CameraView.getSupportedFeatures()?.then(console.log()).catch(console.error);
-
     if (CameraView.isModernBarcodeScannerAvailable) {
       const listener = CameraView.onModernBarcodeScanned((event) => {
         handleQRCode(event?.data);
