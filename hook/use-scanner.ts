@@ -13,7 +13,6 @@ export const useScanner = () => {
         await CameraView.launchScanner({
           barcodeTypes: ["qr"],
         });
-        return;
       } catch (e) {
         const error = e as Error;
         console.error(error);
@@ -23,7 +22,7 @@ export const useScanner = () => {
         ToastAndroid.show(error?.message, ToastAndroid.SHORT);
       }
     } else {
-      ToastAndroid.show("Scanner not avaible on device", ToastAndroid.SHORT);
+      ToastAndroid.show("Scanner not available on device", ToastAndroid.SHORT);
     }
   }
 
@@ -34,7 +33,6 @@ export const useScanner = () => {
       });
       return () => {
         listener.remove();
-        CameraView.dismissScanner();
       };
     }
   }, []);
