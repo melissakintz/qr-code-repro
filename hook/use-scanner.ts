@@ -1,20 +1,9 @@
 import { ToastAndroid } from "react-native";
 import { CameraView } from "expo-camera";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 
 export const useScanner = () => {
-  const isRunning = useRef<boolean>(false);
-
-  const handleQRCode = useCallback(async (data: string) => {
-    if (!data || isRunning.current) {
-      ToastAndroid.show(
-        !data
-          ? "Aucune donnée détéctée"
-          : "Vérification des données en cours, veuillez patienter",
-        ToastAndroid.SHORT,
-      );
-      return;
-    }
+  const handleQRCode = useCallback((data: string) => {
     ToastAndroid.show(data, ToastAndroid.SHORT);
   }, []);
 
