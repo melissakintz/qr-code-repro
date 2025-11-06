@@ -31,6 +31,8 @@ export const useScanner = () => {
         }
         ToastAndroid.show(error?.message, ToastAndroid.SHORT);
       }
+    } else {
+      ToastAndroid.show("Scanner not avaible on device", ToastAndroid.SHORT);
     }
   }
 
